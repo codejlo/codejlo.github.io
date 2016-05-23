@@ -1,3 +1,58 @@
+<<<<<<< HEAD
+
+body {
+	max-width: 650px;
+	padding: 10px;
+}
+
+.outside-text {
+	font-family: sans-serif;
+	margin-top: 35px;
+}
+
+nav {
+	padding-left: 10px;
+	border: 2px solid gray;
+	background: silver;
+	text-align: center;
+}
+
+table {
+	border: 2px solid gray;
+}
+
+footer {
+	position: absolute;
+	top: 50%;
+	margin-bottom: 50px;
+}
+
+.image-holder {
+	position: relative;
+	display: block;
+	height: 150px;
+	text-align: center;
+}
+
+#background-image1 {
+	position: absolute;
+	z-index: -1;
+	opacity: .25;
+	transform: translate(-10%,-50%);
+	max-width: 100px;
+	max-height: 100px;
+}
+
+a:visited {
+	color: black;
+}
+
+@media screen and (max-width: 400px) {
+  body {
+    font-size: .5em;
+  }
+=======
 body {
 	background: blue;
+>>>>>>> master
 }
