@@ -42,7 +42,7 @@ body {
 	display: inline-block;
 	font-size: 2.5vmin;
 	font-family: var(--header-font);
-	width: 22vmin;
+	width: 30vmin;
 	font-weight: bold;
 	padding: 1vmin;
 }
@@ -55,7 +55,7 @@ body {
 	width: 22vmin;
 	font-weight: lighter;
 	padding: 1vmin;
-	padding-left: 50vmin;
+	padding-left: 40vmin;
 	vertical-align: middle;
 	text-align: right;
 }
