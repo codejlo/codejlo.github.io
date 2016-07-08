@@ -2,12 +2,12 @@
 	--square-size: 6.5vh;
 	--header-font: 'Varela Round', sans-serif;
 	--body-font: 'Varela Round', sans-serif;
-	--mine-color: #F60A20;
-	--warning-color: #FFFF5C;
-	--safe-color: #E8EBF7;
-	--tile-color: #69626D;
-	--button-click-color: #3E92CC;
-	--header-color: #919098;
+	--mine-color: #e74c3c;
+	--warning-color: #f1c40f;
+	--safe-color: #bdc3c7;
+	--tile-color: #7f8c8d;
+	--button-click-color: #3498db;
+	--header-color: #34495e;
 }
 
 body {
@@ -57,6 +57,7 @@ body {
 	padding: 1vmin;
 	padding-left: 50vmin;
 	vertical-align: middle;
+	text-align: right;
 }
 
 #starter {
