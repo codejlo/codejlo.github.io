@@ -1,0 +1,134 @@
+:root {
+	--square-size: 6.5vh;
+}
+
+body {
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+}
+
+#center {
+	padding: 0px;
+	margin: 0px;
+	width: 100vmin;
+	height: 100vmin;
+	position: fixed;
+	display: block;
+	text-align: center;
+}
+
+#heading {
+	display: inline-block;
+	height: 5vmin;
+	width: 99vmin;
+	margin: .25vmin;
+	border-top-left-radius: 1vmin;
+	border-top-right-radius: 1vmin;
+	background-color: #A4ABBF;
+	text-align: left;
+}
+
+#gamename {
+	display: inline-block;
+	font-size: 2.5vmin;
+	font-family: sans-serif;
+	width: 22vmin;
+	font-weight: bold;
+	padding: 1vmin;
+}
+
+#score {
+	display: inline-block;
+	height: 90%;
+	font-size: 2.5vmin;
+	font-family: sans-serif;
+	width: 22vmin;
+	font-weight: lighter;
+	padding: 1vmin;
+	padding-left: 40vmin;
+	vertical-align: middle;
+}
+
+#dropDown {
+	top: -100vh;
+	left: 10vmin;
+	height: 72vh;
+	width: 80vmin;
+	text-align: center;
+	vertical-align: middle;
+	background: rgba(255,255,255,.9);
+	display: block;
+	position: fixed;
+	z-index: 10000;
+}
+
+#dropDown p {
+	font-size: 8vmin;
+	/*opacity: 100%;*/
+	font-family: sans-serif;
+}
+
+#result {
+	top: 10vh;
+	position: relative;
+	display: inline-block;
+}
+
+#giphy {
+	display: block;
+}
+
+#button {
+	top: 20vh;
+	display: inline-block;
+	position: relative;
+	font-size: 5vmin;
+	/*opacity: 100%;*/
+	font-family: sans-serif;
+	font-weight: bolder;
+	border: 5px #5F6273 solid;
+	border-radius: 2vmin;
+	width: 40vmin;
+	height: 10vmin;
+	padding-top: 5vmin;
+	background: rgba(255,255,255,1);
+}
+
+
+
+.column {
+	display: inline-block;
+	height: var(--square-size);
+	width: var(--square-size);
+	margin: .25vmin;
+	border-radius: .25vmin;
+	background-color: #5F6273;
+}
+
+.column_safe {
+	display: inline-block;
+	height: var(--square-size);
+	width: var(--square-size);
+	margin: .25vmin;
+	border-radius: .25vmin;
+	background-color: #E2E1E9;
+}
+
+.column_close {
+	display: inline-block;
+	height: var(--square-size);
+	width: var(--square-size);
+	margin: .25vmin;
+	border-radius: .25vmin;
+	background-color: #FFC85D;
+}
+
+.column_bomb {
+	display: inline-block;
+	height: var(--square-size);
+	width: var(--square-size);
+	margin: .25vmin;
+	border-radius: 11vmin;
+	background-color: #F00807;
+}
