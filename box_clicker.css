@@ -1,5 +1,13 @@
 :root {
 	--square-size: 6.5vh;
+	--header-font: 'Varela Round', sans-serif;
+	--body-font: 'Varela Round', sans-serif;
+	--mine-color: #F60A20;
+	--warning-color: #FFFF5C;
+	--safe-color: #E8EBF7;
+	--tile-color: #69626D;
+	--button-click-color: #3E92CC;
+	--header-color: #919098;
 }
 
 body {
@@ -25,14 +33,15 @@ body {
 	margin: .25vmin;
 	border-top-left-radius: 1vmin;
 	border-top-right-radius: 1vmin;
-	background-color: #A4ABBF;
+	background-color: var(--header-color);
 	text-align: left;
+	color: white;
 }
 
 #gamename {
 	display: inline-block;
 	font-size: 2.5vmin;
-	font-family: sans-serif;
+	font-family: var(--header-font);
 	width: 22vmin;
 	font-weight: bold;
 	padding: 1vmin;
@@ -42,12 +51,52 @@ body {
 	display: inline-block;
 	height: 90%;
 	font-size: 2.5vmin;
-	font-family: sans-serif;
+	font-family: var(--header-font);
 	width: 22vmin;
 	font-weight: lighter;
 	padding: 1vmin;
-	padding-left: 40vmin;
+	padding-left: 50vmin;
 	vertical-align: middle;
+}
+
+#starter {
+	top: 10vh;
+	left: 10vmin;
+	height: 72vh;
+	width: 80vmin;
+	text-align: center;
+	vertical-align: middle;
+	background: rgba(255,255,255,.9);
+	display: block;
+	position: fixed;
+	z-index: 10000;
+}
+
+#starter p {
+	font-size: 8vmin;
+	font-family: var(--body-font);
+}
+
+#intro_text {
+	top: 10vh;
+	position: relative;
+	display: inline-block;
+}
+
+.difficulty {
+	top: 20vh;
+	display: inline-block;
+	position: relative;
+	font-size: 5vmin;
+	font-family: var(--header-font);
+	font-weight: bolder;
+	border: 5px #5F6273 solid;
+	border-radius: 2vmin;
+	width: 40vmin;
+	height: 7vmin;
+	padding-top: 2vmin;
+	margin-top: 2vmin;
+	background: rgba(255,255,255,1);
 }
 
 #dropDown {
@@ -65,8 +114,7 @@ body {
 
 #dropDown p {
 	font-size: 8vmin;
-	/*opacity: 100%;*/
-	font-family: sans-serif;
+	font-family: var(--body-font);
 }
 
 #result {
@@ -84,8 +132,7 @@ body {
 	display: inline-block;
 	position: relative;
 	font-size: 5vmin;
-	/*opacity: 100%;*/
-	font-family: sans-serif;
+	font-family: var(--header-font);
 	font-weight: bolder;
 	border: 5px #5F6273 solid;
 	border-radius: 2vmin;
@@ -97,38 +144,38 @@ body {
 
 
 
-.column {
+.tile {
 	display: inline-block;
 	height: var(--square-size);
 	width: var(--square-size);
 	margin: .25vmin;
 	border-radius: .25vmin;
-	background-color: #5F6273;
+	background-color: var(--tile-color);
 }
 
-.column_safe {
+.tile_safe {
 	display: inline-block;
 	height: var(--square-size);
 	width: var(--square-size);
 	margin: .25vmin;
 	border-radius: .25vmin;
-	background-color: #E2E1E9;
+	background-color: var(--safe-color);
 }
 
-.column_close {
+.tile_warning {
 	display: inline-block;
 	height: var(--square-size);
 	width: var(--square-size);
 	margin: .25vmin;
 	border-radius: .25vmin;
-	background-color: #FFC85D;
+	background-color: var(--warning-color);
 }
 
-.column_bomb {
+.tile_mine {
 	display: inline-block;
 	height: var(--square-size);
 	width: var(--square-size);
 	margin: .25vmin;
 	border-radius: 11vmin;
-	background-color: #F00807;
+	background-color: var(--mine-color);
 }
