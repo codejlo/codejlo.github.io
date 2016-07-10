@@ -3,7 +3,10 @@
 	--header-font: 'Varela Round', sans-serif;
 	--body-font: 'Varela Round', sans-serif;
 	--mine-color: #e74c3c;
-	--warning-color: #f1c40f;
+	--warning-color1: #f1c40f;
+	--warning-color2: #f39c12;
+	--warning-color3: #d35400;
+	--warning-color4: #e74c3c;
 	--safe-color: #bdc3c7;
 	--tile-color: #7f8c8d;
 	--button-click-color: #3498db;
@@ -163,13 +166,49 @@ body {
 	background-color: var(--safe-color);
 }
 
-.tile_warning {
+.tile_warning1 {
 	display: inline-block;
 	height: var(--square-size);
 	width: var(--square-size);
 	margin: .25vmin;
 	border-radius: .25vmin;
 	background-color: var(--warning-color);
+}
+
+.tile_warning1 {
+	display: inline-block;
+	height: var(--square-size);
+	width: var(--square-size);
+	margin: .25vmin;
+	border-radius: .25vmin;
+	background-color: var(--warning-color1);
+}
+
+.tile_warning2 {
+	display: inline-block;
+	height: var(--square-size);
+	width: var(--square-size);
+	margin: .25vmin;
+	border-radius: .25vmin;
+	background-color: var(--warning-color2);
+}
+
+.tile_warning3 {
+	display: inline-block;
+	height: var(--square-size);
+	width: var(--square-size);
+	margin: .25vmin;
+	border-radius: .25vmin;
+	background-color: var(--warning-color3);
+}
+
+.tile_warning4 {
+	display: inline-block;
+	height: var(--square-size);
+	width: var(--square-size);
+	margin: .25vmin;
+	border-radius: .25vmin;
+	background-color: var(--warning-color4);
 }
 
 .tile_mine {

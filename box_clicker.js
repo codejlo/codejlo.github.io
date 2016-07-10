@@ -66,7 +66,12 @@ function buildBoard(user_difficulty) {
 
 	// randomly place mines in the board space
 	for (var i = 0; i<num_mines; i++) {
-		mine_ids.push(getRandomIntInclusive(0,num_tiles-1));
+		if (mine_ids.indexOf(i) >= 0) {
+			// do nothing if duplicate
+		}
+		else {
+			mine_ids.push(getRandomIntInclusive(0,num_tiles-1));
+		}
 	};
 
 	// assign all the tiles of the board with an underlying state
@@ -106,15 +111,19 @@ function buildBoard(user_difficulty) {
 			target_tile = mine_ids[mine_place]+warning_zone[warning_index]
 			target_tile_class = board_classes[target_tile]
 
-			if (target_tile_class == 'tile_warning' // already designated as a warning tile
-				|| target_tile_class == 'tile_mine' // already designated as a mine
+			if (target_tile_class == 'tile_mine' // already designated as a mine
 				|| target_tile_class >= num_tiles   // target is outside of the tile space (the bottom of the board)
 				|| target_tile_class <= 0) {		  // target is outside of the tile space (the top of the board)
 				// do nothing
 			}
+			else if (target_tile_class != undefined && target_tile_class.indexOf('tile_warning') >= 0) {
+				var new_warning_number = (parseInt(target_tile_class[12],10)+1).toString();
+				var new_target_tile_class = target_tile_class.substring(0,12) + new_warning_number;
+				board_classes[target_tile] = new_target_tile_class;
+			}
 			else  {
 				// set current tile class to warning
-				board_classes[target_tile] = 'tile_warning';
+				board_classes[target_tile] = 'tile_warning1';
 			}
 		}
 	}
