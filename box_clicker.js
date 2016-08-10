@@ -142,6 +142,7 @@ function turnTile(tile_id, tile_class, gameOver, gameScore) {
 	$(tile_id_str).removeClass();
 	$(tile_id_str).addClass(tile_class);
 	if (tile_class == 'tile_mine') {		
+		mario_music.pause();
 		bomb_sound.play();
 		gameOver = true;
 	}
@@ -264,7 +265,6 @@ $(document).ready(function() {
 						return getTileClass($(this).attr('id'),board_classes);
 					});
 				});
-
 				mario_music.pause();
 				victory_music.play();
 
