@@ -1,5 +1,6 @@
 :root {
-	--square-size: 6.5vh;
+	--square-size: 3vh;
+	--square-margin-size: .05vmin;
 	--header-font: 'Varela Round', sans-serif;
 	--body-font: 'Varela Round', sans-serif;
 	--mine-color: #e74c3c;
@@ -31,7 +32,7 @@ body {
 
 #heading {
 	display: inline-block;
-	height: 5vmin;
+	height: 7vmin;
 	width: 99vmin;
 	margin: .25vmin;
 	border-top-left-radius: 1vmin;
@@ -43,7 +44,7 @@ body {
 
 #gamename {
 	display: inline-block;
-	font-size: 2.5vmin;
+	font-size: 3vmin;
 	font-family: var(--header-font);
 	width: 30vmin;
 	font-weight: bold;
@@ -146,14 +147,21 @@ body {
 	background: rgba(255,255,255,1);
 }
 
-
+.legend_tile {
+	display: inline-block;
+	height: var(--square-size);
+	width: var(--square-size);
+	margin: var(--square-margin-size);
+	border-radius: var(--square-margin-size);
+	background-color: var(--tile-color);
+}
 
 .tile {
 	display: inline-block;
 	height: var(--square-size);
 	width: var(--square-size);
-	margin: .25vmin;
-	border-radius: .25vmin;
+	margin: var(--square-margin-size);
+	border-radius: var(--square-margin-size);
 	background-color: var(--tile-color);
 }
 
@@ -161,8 +169,8 @@ body {
 	display: inline-block;
 	height: var(--square-size);
 	width: var(--square-size);
-	margin: .25vmin;
-	border-radius: .25vmin;
+	margin: var(--square-margin-size);
+	border-radius: var(--square-margin-size);
 	background-color: var(--safe-color);
 }
 
@@ -170,8 +178,8 @@ body {
 	display: inline-block;
 	height: var(--square-size);
 	width: var(--square-size);
-	margin: .25vmin;
-	border-radius: .25vmin;
+	margin: var(--square-margin-size);
+	border-radius: var(--square-margin-size);
 	background-color: var(--warning-color);
 }
 
@@ -179,8 +187,8 @@ body {
 	display: inline-block;
 	height: var(--square-size);
 	width: var(--square-size);
-	margin: .25vmin;
-	border-radius: .25vmin;
+	margin: var(--square-margin-size);
+	border-radius: var(--square-margin-size);
 	background-color: var(--warning-color1);
 }
 
@@ -188,8 +196,8 @@ body {
 	display: inline-block;
 	height: var(--square-size);
 	width: var(--square-size);
-	margin: .25vmin;
-	border-radius: .25vmin;
+	margin: var(--square-margin-size);
+	border-radius: var(--square-margin-size);
 	background-color: var(--warning-color2);
 }
 
@@ -197,8 +205,8 @@ body {
 	display: inline-block;
 	height: var(--square-size);
 	width: var(--square-size);
-	margin: .25vmin;
-	border-radius: .25vmin;
+	margin: var(--square-margin-size);
+	border-radius: var(--square-margin-size);
 	background-color: var(--warning-color3);
 }
 
@@ -206,8 +214,8 @@ body {
 	display: inline-block;
 	height: var(--square-size);
 	width: var(--square-size);
-	margin: .25vmin;
-	border-radius: .25vmin;
+	margin: var(--square-margin-size);
+	border-radius: var(--square-margin-size);
 	background-color: var(--warning-color4);
 }
 
@@ -215,7 +223,7 @@ body {
 	display: inline-block;
 	height: var(--square-size);
 	width: var(--square-size);
-	margin: .25vmin;
-	border-radius: 11vmin;
+	margin: var(--square-margin-size);
+	border-radius: var(--square-size);
 	background-color: var(--mine-color);
 }
