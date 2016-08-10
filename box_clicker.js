@@ -14,7 +14,7 @@ function getTileClass(myId, board_classes) {
 // For a given mine, determine the correct geometry of warning tile placement
 // i.e. if a mine is along a wall, you don't need to set warning tiles on the wall
 // side of the mine.
-function findWarningGeometry(tile_index, board_width) {
+function findGeometry(tile_index, board_width) {
 	
 	var mine_geometry_all = [-board_width-1, -board_width, -board_width+1, -1, +1, +board_width-1, +board_width, +board_width+1];
 	var mine_geometry_right_wall = [-board_width-1, -board_width, -1, +board_width-1, +board_width];
@@ -39,8 +39,8 @@ function findWarningGeometry(tile_index, board_width) {
 function buildBoard(user_difficulty) {
 
 	// define board variables
-	var board_width = 8
-	var board_length = 12
+	var board_width = 16;
+	var board_length = 24;
 	var num_tiles = board_width * board_length;
 	var board_ids = Array.apply(null, {length: num_tiles}).map(Number.call, Number);
 	var board_classes = new Array(num_tiles);
@@ -83,7 +83,6 @@ function buildBoard(user_difficulty) {
 		// later to be reduced as we place the mines and warning tiles
 	}
 
-
 	// place the mines and warning tiles
 	for (mine_place in mine_ids) {
 		
@@ -93,7 +92,7 @@ function buildBoard(user_difficulty) {
 		// For a given mine, determine the correct geometry of warning tile placement
 		// i.e. if a mine is along a wall, you don't need to set warning tiles on the wall
 		// side of the mine.
-		warning_zone = findWarningGeometry(mine_location, board_width)
+		warning_zone = findGeometry(mine_location, board_width)
 		
 		// Place the mines in the board space.
 		// Sometimes, our random assignment will pick the same tile twice to receive a bomb.
@@ -112,8 +111,8 @@ function buildBoard(user_difficulty) {
 			target_tile_class = board_classes[target_tile]
 
 			if (target_tile_class == 'tile_mine' // already designated as a mine
-				|| target_tile_class >= num_tiles   // target is outside of the tile space (the bottom of the board)
-				|| target_tile_class <= 0) {		  // target is outside of the tile space (the top of the board)
+				|| target_tile >= num_tiles   // target is outside of the tile space (the bottom of the board)
+				|| target_tile < 0) {		  // target is outside of the tile space (the top of the board)
 				// do nothing
 			}
 			else if (target_tile_class != undefined && target_tile_class.indexOf('tile_warning') >= 0) {
@@ -127,7 +126,49 @@ function buildBoard(user_difficulty) {
 			}
 		}
 	}
-	return [board_classes, tiles_available];
+	return [board_classes, tiles_available, board_width, board_length];
+}
+
+function turnTile(tile_id, tile_class, gameOver, gameScore) {
+	tile_id_str = "#" + (tile_id).toString()
+	$(tile_id_str).removeClass();
+	$(tile_id_str).addClass(tile_class);
+	if (tile_class == 'tile_mine') {
+		gameOver = true;
+	}
+
+	gameScore++;
+	return [gameOver, gameScore];
+}
+
+function clearSurroundings(index, board_width, board_length, geometry, board_classes, gameScore, gameOver) {
+	for (tile in geometry) {
+		tile_id = index + geometry[tile];
+		tile_id_str = "#" + (tile_id).toString()
+		
+		if ($(tile_id_str).attr('data-clicked') == 'clicked') {
+			// do nothing
+		}
+		else if (tile_id >= board_width * board_length || tile_id < 0) {
+			// do nothing
+		}
+		else {
+			if (board_classes[tile_id] == 'tile_mine') {
+				// do nothing
+			}
+			else if (board_classes[tile_id] == 'tile_safe') {
+				$(tile_id_str).attr('data-clicked', 'clicked');
+				[gameOver, gameScore] = turnTile(tile_id, 'tile_safe', gameOver, gameScore);
+				[gameOver, gameScore] = clearSurroundings(tile_id, board_width, board_length, findGeometry(tile_id, board_width), board_classes, gameScore, gameOver);
+			}
+			else {
+				$(tile_id_str).attr('data-clicked', 'clicked');
+				[gameOver, gameScore] = turnTile(tile_id, board_classes[tile_id], gameOver, gameScore);
+			}
+
+		}
+	}
+	return [gameOver, gameScore];
 }
 
 // ######### DOM Manipulation #########
@@ -142,13 +183,14 @@ $(document).ready(function() {
 	var user_difficulty = null;
 	var board_classes = [];
 	var tiles_available = 0;
+	var board_width = 0;
 
 	$('.difficulty').click(function() {
 		$(this).css("background-color","var(--button-click-color)");
 
 		user_difficulty = $(this).attr('id');
 
-		[board_classes, tiles_available] = buildBoard(user_difficulty);
+		[board_classes, tiles_available, board_width, board_length] = buildBoard(user_difficulty);
 
 		$('#starter').animate({
 			top: '-100vh'
@@ -168,22 +210,15 @@ $(document).ready(function() {
 
 	$('.tile').click(function() {
 		if ($(this).attr('data-clicked') != 'clicked') {
-			
-			// add a point to the score
-			gameScore++;
 
 			// note that this tile has been clicked so it cannot be clicked again
 			$(this).attr('data-clicked', 'clicked');
 
 			// change the class of this tile based on previously-determined board geometry
-			$(this).removeClass('tile');
-			$(this).addClass(function() {
-				this_class = getTileClass($(this).attr('id'),board_classes)
-				if (this_class == 'tile_mine') {
-					gameOver = true;
-				}
-				return this_class;
-			});
+			tile_id = parseInt($(this).attr('id'),10);
+			tile_class = board_classes[tile_id];
+			[gameOver, gameScore] = turnTile(tile_id, board_classes[tile_id], gameOver, gameScore);
+
 
 			// if you hit a mine this turn, end the game
 			if (gameOver==true) {
@@ -208,8 +243,7 @@ $(document).ready(function() {
 					location.reload();
 				});
 			}
-
-			if (gameScore == tiles_available) {
+			else if (gameScore == tiles_available) {
 				// show all remaining tiles in an uncovered state
 				$(".tile").each(function() {
 					$(this).toggleClass(function() {
@@ -230,6 +264,10 @@ $(document).ready(function() {
 					$('#button').css("background-color","var(--button-click-color)")
 					location.reload();
 				});
+			}
+			else {
+				this_surroundings = findGeometry(tile_id, board_width);
+				[gameOver, gameScore] = clearSurroundings (tile_id, board_width, board_length, this_surroundings, board_classes, gameScore, gameOver);
 			}
 
 
