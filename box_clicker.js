@@ -129,12 +129,24 @@ function buildBoard(user_difficulty) {
 	return [board_classes, tiles_available, board_width, board_length];
 }
 
+bomb_sound = new Audio("sounds/bomb.mp3")
+shuffle_sound = new Audio("sounds/shuffle.mp3")
+mario_music = new Audio("sounds/SuperMarioBros.mp3")
+victory_music = new Audio("sounds/victory.mp3")
+mario_music.load();
+
+
 function turnTile(tile_id, tile_class, gameOver, gameScore) {
+
 	tile_id_str = "#" + (tile_id).toString()
 	$(tile_id_str).removeClass();
 	$(tile_id_str).addClass(tile_class);
-	if (tile_class == 'tile_mine') {
+	if (tile_class == 'tile_mine') {		
+		bomb_sound.play();
 		gameOver = true;
+	}
+	else {
+		shuffle_sound.play();
 	}
 
 	gameScore++;
@@ -195,6 +207,8 @@ $(document).ready(function() {
 		$('#starter').animate({
 			top: '-100vh'
 		});
+
+		mario_music.play();
 	});
 
 	$('.tile').each(function() {
@@ -250,6 +264,9 @@ $(document).ready(function() {
 						return getTileClass($(this).attr('id'),board_classes);
 					});
 				});
+
+				mario_music.pause();
+				victory_music.play();
 
 				// write the win text to the html
 				$('#result').html('You win!!!');
